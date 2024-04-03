@@ -1,0 +1,117 @@
+
+\section{Câu 1:}
+
+\qquad Theo định nghĩa hẹp, thị trường là nơi diễn ra hoạt động mua bán, trao đổi hàng hóa và dịch vụ, có thể là các địa điểm cụ thể như chợ, cửa hàng truyền thống hoặc các nền tảng trực tuyến như website thương mại điện tử. Thị trường ở đây đóng vai trò là một nơi kết nối giữa người mua và người bán. Trong nghĩa rộng hơn, thị trường không chỉ đơn giản là nơi giao dịch mà còn là tổng thể các mối quan hệ kinh tế, bao gồm quan hệ cung - cầu, cạnh tranh, quan hệ giữa hàng hóa và tiền tệ, cũng như mối liên kết giữa giá cả và giá trị. Thị trường ở mức độ này phản ánh trạng thái tổng thể của nền kinh tế, nơi mà nhu cầu của các chủ thể kinh tế được đáp ứng thông qua các quá trình trao đổi hàng hóa và dịch vụ, đồng thời có sự xác định về giá cả và số lượng.
+
+\qquad Cơ chế thị trường là hệ thống các quan hệ kinh tế tự điều chỉnh, hoạt động dựa trên các quy luật kinh tế như luật cung - cầu, luật cạnh tranh, và các yếu tố khác. Điều này đảm bảo rằng thị trường có thể hoạt động một cách hiệu quả và linh hoạt.
+
+\qquad Kinh tế thị trường là một hình thức tổ chức kinh tế trong đó các hoạt động sản xuất, phân phối và tiêu thụ được điều chỉnh chủ yếu bởi cơ chế thị trường. Nền kinh tế này dựa vào sự tương tác giữa các chủ thể kinh tế và các yếu tố thị trường để quyết định về sản xuất và tiêu dùng.
+
+\qquad Trong thực tế của Việt Nam, khái niệm và cơ chế thị trường được áp dụng và phản ánh qua nhiều khía cạnh:
+\begin{itemize}
+    \item Các thị trường truyền thống: Trong nền kinh tế Việt Nam, các chợ truyền thống vẫn đóng vai trò quan trọng trong việc mua bán hàng hóa và dịch vụ. Các cửa hàng, cửa hàng tạp hóa, cửa hàng địa phương cũng là các điểm mua sắm phổ biến ở nhiều địa phương.
+    \item Nền tảng thương mại điện tử: Trong những năm gần đây, thị trường thương mại điện tử ở Việt Nam đã phát triển mạnh mẽ, với sự xuất hiện của các nền tảng như Shopee, Lazada, Tiki, và các trang web bán hàng trực tuyến khác. Điều này phản ánh sự thay đổi và chuyển đổi từ thị trường truyền thống sang thị trường trực tuyến, thích ứng với sự phát triển của công nghệ thông tin và internet.
+    \item Các quy luật kinh tế áp dụng: Trong thực tiễn, các quy luật kinh tế như luật cung - cầu và luật cạnh tranh đều đóng vai trò quan trọng trong việc điều chỉnh giá cả và quyết định về sản xuất, tiêu dùng. Sự cạnh tranh giữa các doanh nghiệp cũng là một yếu tố quan trọng khích lệ sự sáng tạo và cải thiện chất lượng sản phẩm và dịch vụ.
+    \item Chính sách và quy định của chính phủ: Trong nền kinh tế thị trường của Việt Nam, chính phủ có vai trò quan trọng trong chính sách và quy định để điều chỉnh và hỗ trợ cho hoạt động thị trường. Các biện pháp như quản lý giá cả, thuế và các chính sách hỗ trợ doanh nghiệp đều ảnh hưởng đến hoạt động của thị trường.
+    \item Sự tương tác giữa các chủ thể kinh tế: Các doanh nghiệp, người tiêu dùng và các nhà đầu tư tạo ra một môi trường thị trường động lực, với sự tương tác và thương lượng giữa các bên để đạt được lợi ích cá nhân và cũng đóng góp vào phát triển của nền kinh tế.
+\end{itemize}
+
+\section{Câu 2:}
+\begin{tikzpicture}[mindmap, grow cyclic, every node/.style=concept, concept color=orange!40,  align=flush center,
+        level 1/.style={level distance=5cm,sibling angle=90},
+	level 2/.style={level distance=3.5cm,sibling angle=45},
+        level 3/.style={level distance=3cm,sibling angle=90},
+        level 4/.style={level distance=3cm,sibling angle=90},
+ ]
+    \node{Quy luật kinh tế trong nền KTTT}
+	child [concept color=blue!30]{ node {QL giá trị}
+        }
+	child [concept color=yellow!30]{ node {QL cung-cầu}
+        }
+	child [concept color=red!30]{ node {QL lưu thông tiền tệ}
+        }
+	child [concept color=green!30]{ node {QL cạnh tranh}
+        };
+\end{tikzpicture}
+\vspace{5cm}
+
+\begin{tikzpicture}[mindmap, grow cyclic, every node/.style=concept, concept color=orange!40,  align=flush center, 
+        level 1/.style={level distance=5cm,sibling angle=90},
+	level 2/.style={level distance=5cm,sibling angle=90},]
+    \node{QL giá trị}
+        child [concept color=blue!30]{ node {là QL kinh tế cơ bản, cơ sở của tất cả các QL khác}}
+        child [concept color=green!30]{node {dựa trên cơ sở \textbf{hao phí lao dộng xã hội cần thiết}}
+            child {node {\textbf{sản xuất}: Hao phí LĐ cá biệt phù hợp với hao phí LĐ xã hội cần thiết}}
+            child {node {\textbf{trao đổi}:Theo nguyên tắc ngang giá}}
+        }
+        child [concept color=red!30]{{node {{\textbf{cơ chế tác động}: Thông qua giá cả thị trường}}}}
+        child [concept color=yellow!30]{{node {{\textbf{Tác dụng}:}}
+            child {node { Điều tiết SX,lưu thông HH,kích thích cải tiến KT, hợp lý hóa sản xuất,tăng năng suất LĐ,hạ giá thành SP}}
+            child {node {Phân hóa người SXHH thành giàu,nghèo}}
+        }
+        }
+\end{tikzpicture}
+\vspace{5cm}
+
+
+\begin{tikzpicture}[mindmap, grow cyclic, every node/.style=concept, concept color=orange!40,  align=flush center, 
+        level 1/.style={level distance=5cm,sibling angle=90},
+	level 2/.style={level distance=5cm,sibling angle=90},]
+    \node{QL cung-cầu}
+        child [concept color=red!30]{node {là cơ chế tự điều chỉnh của thị trường}}
+        child [concept color=red!30]{node {cung-cầu tác động qua lại với giá cả thông qua \textcolor{blue}{cơ chế giá cả}, cầu xác định cung,cung xđ cầu}
+            child { node {giá cả > giá trị thì cung xu thế giảm, cầu xu thế tăng}}
+            child { node {giá cả < giá trị thì cung xu thế tăng, cầu xu thế giảm}}
+        }
+        child [concept color=pink!30]{node {cung phụ thuộc vào các yếu tố: khả năng SX,chi phí Sx,\textcolor{red}{giá cả} HH,DV}}
+        child [concept color=purple!30]{node {cầu phụ thuộc vào các nhân tố: thu nhập,sức mua,\textcolor{red}{giá cả},lãi suất,thị hiếu,...}}
+        child {node { Điều tiết QHSX qua QH cung cầu, thay đổi cơ cấu quy mô TT, ảnh hưởng đến giá cả}};
+\end{tikzpicture}
+
+
+\begin{tikzpicture}[mindmap, grow cyclic, every node/.style=concept, concept color=orange!40,  align=flush center, 
+        level 1/.style={level distance=5cm,sibling angle=90},
+	level 2/.style={level distance=5cm,sibling angle=45},
+	level 3/.style={level distance=7cm,sibling angle=90},
+ ]
+    \node{QL lưu thông tiền tệ}
+        child [concept color=brown!30]{node {nếu tiền làm chức năng phương tiện lưu thông + thanh toán: }}
+        child [concept color=yellow!30]{node {Tiền giấy vượt mức cần thiết để lưu thông dẫn đến \textbf{LẠM PHÁT}}
+            child {node {là sự tăng mức giá chung liên tục của HH,DV,và mất giá trị của tiền tệ}}
+            child {node {\textbf{nguyên nhân}: cầu kéo, chi phí đẩy, mở rộng tín dụng quá mức,...}}
+            child {node {\textbf{phân loại}: LP vừa(<10\%)},LP phi mã(>10\%),siêu LP(>100\%)}
+        }
+        child [concept color=red!30]{node {QL quy định lượng tiền cần cho LTHH trong 1 thời kỳ nhất định phải thống nhất với lưu thông HH}}
+        child [concept color=blue!30]{node {số lượng tiền cần thiết=Giá cả hóa x Khối lượng HH, DV đang lưu thông/ tốc độ lưu thông đồng tiền}}
+        ;
+\end{tikzpicture}
+\begin{itemize}
+    \item \begin{figure}
+        \centering
+        \includegraphics[width = 12cm]{1.png}
+        \caption{Khi \textbf{số lượng tiền tệ cần thiết} thống nhất với lưu thông hàng hóa}
+        \includegraphics[width = 12cm]{2.png}
+        \caption{Khi tiền làm chức năng phương tiện lưu thông + phương tiện thanh toán}
+        \label{fig:enter-label}
+    \end{figure}
+\end{itemize}
+\begin{tikzpicture}[mindmap, grow cyclic, every node/.style=concept, concept color=orange!40,  align=flush center, 
+        level 1/.style={level distance=5cm,sibling angle=90},
+	level 2/.style={level distance=5cm,sibling angle=120},
+	level 3/.style={level distance=4.5cm,sibling angle=120},
+ ]
+    \node{QL cạnh tranh}
+            child [concept color=green!30]{node {là QLKT điều tiết khách quan mối quan hệ ganh đua kinh tế giữa các chủ thể trong SX trao đổi HH}
+                child {node {cạnh tranh trong nội bộ ngành}
+                    child {node {\textbf{biện pháp}:các doanh nghiệp phải làm sao cho GTHH SX ra thấp hơn GT xã hội HH}}
+                    child {node {\textbf{kết quả}:hình thành thị trường từng loại HH}}
+                }
+                child [concept color=purple!30]{node {cạnh tranh giữa các ngành}
+                    child {node {\textbf{biện pháp}:các doanh nghiệp tự do di chuyển nguồn lực giữa các ngành SX khác nhau}}
+                    child {node {\textbf{mục đích}:tìm kiếm nơi đầu tư có lợi nhất}}
+                }
+            }
+            child [concept color=red!30]{node {\textbf{tác động tích cực}:thúc đẩy LLSX,KTTT,thỏa mãn nhu cầu XH,điều chỉnh linh hoạt nguồn lực}}    
+            child [concept color=blue!30]{node {\textbf{tác động tiêu cực}:tổn hại môi trường KD,phúc lợi XH,lãng phí nguồn lực XH,}};
+\end{tikzpicture}
+\end{document}
