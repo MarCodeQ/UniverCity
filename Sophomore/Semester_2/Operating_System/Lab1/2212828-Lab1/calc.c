@@ -3,3 +3,4 @@
 int main(){
   display("logic"); // display function is called
 }
+

@@ -50,6 +50,7 @@ int main()
   int choice = 0;
   do
   {
+    choice = readChoice();
     switch (choice)
     {
     case 0:
