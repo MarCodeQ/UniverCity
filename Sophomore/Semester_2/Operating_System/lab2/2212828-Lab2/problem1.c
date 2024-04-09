@@ -16,7 +16,7 @@
 //   int userRate
 // } userRate;
 
-void readInput(char *filename, int (*vector)[MAXMOVIES][MAXUSERS])
+void readInput(char *filename, int (*nvector)[MAXMOVIES][MAXUSERS])
 {
   FILE *file = fopen(filename, "r");
   int userID, movieID, userRate, timestamp;
@@ -71,7 +71,7 @@ int main()
         ave_arr[movie] = ave_userRate;
       }
       FILE *file = fopen("moviesRating.txt", "w");
-      for (int i = 0; i < 10; i++)
+      for (int i = 0; i < MAXMOVIES; i++)
       {
         fprintf(file, "Movie %d userRate %f\n", i + 1, ave_arr[i]);
       }

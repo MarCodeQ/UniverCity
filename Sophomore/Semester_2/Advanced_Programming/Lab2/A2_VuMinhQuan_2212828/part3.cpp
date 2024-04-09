@@ -47,7 +47,7 @@ void addStudent(Student **students, int &numStudents)
   cout << "Student added successfully!" << endl;
 }
 
-void displayStudents(const Student **students, int numStudents)
+void displayStudents(Student **students, int numStudents)
 {
   cout << "List of students:" << endl;
   for (int i = 0; i < numStudents; i++)
@@ -56,7 +56,7 @@ void displayStudents(const Student **students, int numStudents)
   }
 }
 
-void displayBestStudents(const Student **students, int numStudents)
+void displayBestStudents(Student **students, int numStudents)
 {
   int maxScore = 0;
 

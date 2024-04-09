@@ -6,23 +6,22 @@ using namespace std;
 class Student
 {
 public:
-  Student(const std::string &name, int score) : name(name), score(score) {}
+  Student(const string &name, int score) : name(name), score(score) {}
   ~Student() {}
 
-  std::string getName() const { return name; }
+  string getName() const { return name; }
   int getScore() const { return score; }
 
 private:
-  std::string name;
+  string name;
   int score;
 };
-
 class University
 {
 public:
-  University(const std::string &name) : name(name) {}
+  University(const string &name) : name(name) {}
 
-  void addStudent(const std::string &name, int score)
+  void addStudent(const string &name, int score)
   {
     students.push_back(Student(name, score));
   }
@@ -31,7 +30,7 @@ public:
   {
     for (const auto &student : students)
     {
-      std::cout << "Name: " << student.getName() << ", Score: " << student.getScore() << std::endl;
+      cout << "Name: " << student.getName() << ", Score: " << student.getScore() << endl;
     }
   }
 
@@ -50,76 +49,76 @@ public:
     {
       if (student.getScore() == maxScore)
       {
-        std::cout << "Name: " << student.getName() << ", Score: " << student.getScore() << std::endl;
+        cout << "Name: " << student.getName() << ", Score: " << student.getScore() << endl;
       }
     }
   }
 
-  void removeStudent(const std::string &name)
+  void removeStudent(const string &name)
   {
-    students.erase(std::remove_if(students.begin(), students.end(),
-                                  [&](const Student &student)
-                                  { return student.getName() == name; }),
+    students.erase(remove_if(students.begin(), students.end(),
+                             [&](const Student &student)
+                             { return student.getName() == name; }),
                    students.end());
   }
 
 private:
-  std::string name;
-  std::vector<Student> students;
+  string name;
+  vector<Student> students;
 };
-
+int readChoice()
+{
+  int choice;
+  cout << "Enter 0 to quit" << endl;
+  cout << "Enter 1 to add a student" << endl;
+  cout << "Enter 2 to display all students" << endl;
+  cout << "Enter 3 to find student has highest score" << endl;
+  cin >> choice;
+  return choice;
+}
 int main()
 {
   University university("My University");
-
-  int choice;
-  while (true)
+  int choice = 0;
+  do
   {
-    std::cout << "Menu:" << std::endl;
-    std::cout << "1. Add Student" << std::endl;
-    std::cout << "2. Display Students" << std::endl;
-    std::cout << "3. Display Best Students" << std::endl;
-    std::cout << "4. Remove Student" << std::endl;
-    std::cout << "5. Exit" << std::endl;
-    std::cout << "Enter your choice: ";
-    std::cin >> choice;
-
-    if (choice == 1)
+    choice = readChoice();
+    switch (choice)
     {
-      std::string name;
+    case 1:
+    {
+      string name;
       int score;
-      std::cout << "Enter student name: ";
-      std::cin >> name;
-      std::cout << "Enter student score: ";
-      std::cin >> score;
+      cout << "Enter student name: ";
+      cin >> name;
+      cout << "Enter student score: ";
+      cin >> score;
       university.addStudent(name, score);
     }
-    else if (choice == 2)
+    case 2:
     {
       university.displayStudents();
     }
-    else if (choice == 3)
+    case 3:
     {
       university.displayBestStudents();
     }
-    else if (choice == 4)
+    case 4:
     {
-      std::string name;
-      std::cout << "Enter student name to remove: ";
-      std::cin >> name;
+      string name;
+      cout << "Enter student name to remove: ";
+      cin >> name;
       university.removeStudent(name);
     }
-    else if (choice == 5)
+    case 5:
     {
       break;
     }
-    else
+    case 0:
     {
-      std::cout << "Invalid choice. Please try again." << std::endl;
+      cout << "Invalid choice. Please try again." << endl;
     }
-
-    std::cout << std::endl;
-  }
-
+    }
+  } while (choice != 0);
   return 0;
 }

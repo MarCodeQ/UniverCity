@@ -1,7 +1,7 @@
 # Define input files and corresponding output executables
 inputs := $(wildcard *.cpp)
 outputs := $(inputs:.cpp=)
-output_path := ../output
+output_path := outputs
 
 # Default target: build all executables
 all: $(outputs)
