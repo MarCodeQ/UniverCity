@@ -9,10 +9,10 @@
 #include <fcntl.h>
 #include <string.h>
 
-#define MAXMOVIES 1683
+#define MAXMOVIES 1682
 #define MAXUSERS 943
 
-void readInput(char *filename, int (*nvector)[MAXMOVIES][MAXUSERS])
+void readInput(char *filename, int (*vector)[MAXMOVIES][MAXUSERS])
 {
   FILE *file = fopen(filename, "r");
   int userID, movieID, userRate, timestamp;
@@ -69,7 +69,7 @@ int main()
       FILE *file = fopen("moviesRating.txt", "w");
       for (int i = 0; i < MAXMOVIES; i++)
       {
-        fprintf(file, "Movie %d userRate %f\n", i + 1, ave_arr[i]);
+        fprintf(file, "Movie %d has rated %f\n", i + 1, ave_arr[i]);
       }
     }
   }

@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 {
   if (argc != 3)
   {
-    printf("ERROR: inputs mustbe ./sum_multi-thread threads n\n");
+    printf("ERROR: input mustbe ./sum_multi-thread threads n\n");
     return 1;
   }
   long long int n = atoll(argv[2]);
