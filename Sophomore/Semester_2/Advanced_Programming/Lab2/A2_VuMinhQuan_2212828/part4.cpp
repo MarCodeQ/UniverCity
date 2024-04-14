@@ -69,10 +69,12 @@ private:
 int readChoice()
 {
   int choice;
-  cout << "Enter 0 to quit" << endl;
-  cout << "Enter 1 to add a student" << endl;
-  cout << "Enter 2 to display all students" << endl;
-  cout << "Enter 3 to find student has highest score" << endl;
+  cout << "\nStudent Management System\n";
+  cout << "1. Add Student\n";
+  cout << "2. Display Students\n";
+  cout << "3. Display Best Student(s)\n";
+  cout << "0. Exit\n";
+  cout << "Enter your choice: ";
   cin >> choice;
   return choice;
 }

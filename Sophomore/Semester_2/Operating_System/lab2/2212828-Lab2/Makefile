@@ -14,4 +14,5 @@ messageTransfer: messageTransfer.c
 	gcc $(CFLAGS) -o $@ $<
 
 clean:
-	rm -f sum_serial sum_multi-threads messageTransfer problem1
+	rm -f sum_serial sum_multi-threads messageTransfer problem1me
+	
