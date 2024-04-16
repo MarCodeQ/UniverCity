@@ -112,10 +112,6 @@ int main()
       cin >> name;
       university.removeStudent(name);
     }
-    case 5:
-    {
-      break;
-    }
     case 0:
     {
       cout << "Invalid choice. Please try again." << endl;

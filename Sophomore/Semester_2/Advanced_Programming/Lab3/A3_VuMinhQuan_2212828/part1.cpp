@@ -201,10 +201,10 @@ int readChoice()
 {
   int choice;
   cout << "\nStudent Management System\n";
+  cout << "0. Exit\n";
   cout << "1. Add UniStudent\n";
   cout << "2. Add CollegeStudent\n";
   cout << "3. Display Students\n";
-  cout << "0. Exit\n";
   cout << "Enter your choice: ";
   cin >> choice;
   return choice;
