@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <cstdlib> // for rand()
+#include <cstdlib>
 
 using namespace std;
 
@@ -192,8 +192,8 @@ int main()
 
   University university("My University");
   int choice = 0;
-  string name, dob, school, course;
-  int semesters;
+  string name, dob, school;
+  int course, semesters;
   do
   {
     choice = readChoice();
@@ -213,7 +213,7 @@ int main()
       university.addUniStudent(name, dob, school, course, semesters);
       break;
     case 2:
-      cout << "Enter CollegeStudent Name: ";
+      cout << "Enter CollegeStudentName : ";
       cin >> name;
       cout << "Enter CollegeStudent Date of Birth (YYYY-MM-DD): ";
       cin >> dob;

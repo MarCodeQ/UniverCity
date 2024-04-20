@@ -9,7 +9,7 @@ using namespace std;
 class Student
 {
 public:
-  Student(const string &name, const string &dob, const string &school, const string &course)
+  Student(const string &name, const string &dob, const string &school, int course)
       : name(name), dob(dob), school(school), course(course) {}
 
   virtual ~Student() {}
@@ -28,13 +28,13 @@ protected:
   string name;
   string dob;
   string school;
-  string course;
+  int course;
 };
 
 class UniStudent : public Student
 {
 public:
-  UniStudent(const string &name, const string &dob, const string &school, const string &course, int semesters)
+  UniStudent(const string &name, const string &dob, const string &school, int course, int semesters)
       : Student(name, dob, school, course), semesters(semesters) {}
 
   void displayDetails() const override
@@ -45,37 +45,34 @@ public:
 
   void DoAssignment() override
   {
-    cout << "Enter scores for UniStudent assignments:" << endl;
+    cout << "Filling UniStudent assignments with random scores:" << endl;
     for (int i = 1; i <= semesters * 4; ++i)
     {
-      int score;
-      cout << "Assignment " << i << " Score: ";
-      cin >> score;
+      int score = rand() % 101;
       assignmentScores.push_back(score);
+      cout << "Assignment " << i << " Score: " << score << endl;
     }
   }
 
   void TakeTest() override
   {
-    cout << "Enter scores for UniStudent tests:" << endl;
+    cout << "Filling UniStudent tests with random scores:" << endl;
     for (int i = 1; i <= semesters * 4; ++i)
     {
-      int score;
-      cout << "Test " << i << " Score: ";
-      cin >> score;
+      int score = rand() % 101;
       testScores.push_back(score);
+      cout << "Test " << i << " Score: " << score << endl;
     }
   }
 
   void TakeExam() override
   {
-    cout << "Enter scores for UniStudent exams:" << endl;
-    for (int i = 1; i <= semesters; ++i)
+    cout << "Filling UniStudent exams with random scores:" << endl;
+    for (int i = 1; i <= semesters * 4; ++i)
     {
-      int score;
-      cout << "Exam Semester " << i << " Score: ";
-      cin >> score;
+      int score = rand() % 101;
       examScores.push_back(score);
+      cout << "Exam Semester " << i << " Score: " << score << endl;
     }
   }
 
@@ -89,7 +86,7 @@ private:
 class CollegeStudent : public Student
 {
 public:
-  CollegeStudent(const string &name, const string &dob, const string &school, const string &course, int semesters)
+  CollegeStudent(const string &name, const string &dob, const string &school, int course, int semesters)
       : Student(name, dob, school, course), semesters(semesters) {}
 
   void displayDetails() const override
@@ -100,36 +97,30 @@ public:
 
   void DoAssignment() override
   {
-    cout << "Enter scores for CollegeStudent assignments:" << endl;
+    cout << "Filling CollegeStudent assignments with random scores:" << endl;
     for (int i = 1; i <= semesters * 3; ++i)
     {
-      int score;
-      cout << "Assignment " << i << " Score: ";
-      cin >> score;
+      int score = rand() % 101;
       assignmentScores.push_back(score);
     }
   }
 
   void TakeTest() override
   {
-    cout << "Enter scores for CollegeStudent tests:" << endl;
+    cout << "Filling CollegeStudent tests with random scores:" << endl;
     for (int i = 1; i <= semesters * 3; ++i)
     {
-      int score;
-      cout << "Test " << i << " Score: ";
-      cin >> score;
+      int score = rand() % 101;
       testScores.push_back(score);
     }
   }
 
   void TakeExam() override
   {
-    cout << "Enter scores for CollegeStudent exams:" << endl;
-    for (int i = 1; i <= semesters; ++i)
+    cout << "Filling CollegeStudent exams with random scores:" << endl;
+    for (int i = 1; i <= semesters * 3; ++i)
     {
-      int score;
-      cout << "Exam Semester " << i << " Score: ";
-      cin >> score;
+      int score = rand() % 101;
       examScores.push_back(score);
     }
   }
@@ -146,12 +137,12 @@ class University
 public:
   University(const string &name) : name(name) {}
 
-  void addUniStudent(const string &name, const string &dob, const string &school, const string &course, int semesters)
+  void addUniStudent(const string &name, const string &dob, const string &school, int course, int semesters)
   {
     uniStudents.push_back(new UniStudent(name, dob, school, course, semesters));
   }
 
-  void addCollegeStudent(const string &name, const string &dob, const string &school, const string &course, int semesters)
+  void addCollegeStudent(const string &name, const string &dob, const string &school, int course, int semesters)
   {
     collegeStudents.push_back(new CollegeStudent(name, dob, school, course, semesters));
   }
@@ -216,8 +207,8 @@ int main()
 
   University university("My University");
   int choice = 0;
-  string name, dob, school, course;
-  int semesters;
+  string name, dob, school;
+  int course, semesters;
   do
   {
     choice = readChoice();
@@ -232,12 +223,22 @@ int main()
       cin >> school;
       cout << "Enter UniStudent Course: ";
       cin >> course;
+      if (course < 1 || course > 4)
+      {
+        cout << "Invalid course. Please enter a course between 1 and 4." << endl;
+        break;
+      }
       cout << "Enter UniStudent Semesters: ";
       cin >> semesters;
+      if (semesters < 1 || semesters > 8)
+      {
+        cout << "Invalid semesters. Please enter a number between 1 and 4." << endl;
+        break;
+      }
       university.addUniStudent(name, dob, school, course, semesters);
       break;
     case 2:
-      cout << "Enter CollegeStudent Name: ";
+      cout << "Enter CollegeStudentName : ";
       cin >> name;
       cout << "Enter CollegeStudent Date of Birth (YYYY-MM-DD): ";
       cin >> dob;
@@ -245,8 +246,18 @@ int main()
       cin >> school;
       cout << "Enter CollegeStudent Course: ";
       cin >> course;
+      if (course < 1 || course > 3)
+      {
+        cout << "Invalid course. Please enter a course between 1 and 4." << endl;
+        break;
+      }
       cout << "Enter CollegeStudent Semesters: ";
       cin >> semesters;
+      if (semesters < 1 || semesters > 4)
+      {
+        cout << "Invalid semesters. Please enter a number between 1 and 4." << endl;
+        break;
+      }
       university.addCollegeStudent(name, dob, school, course, semesters);
       break;
     case 3:
