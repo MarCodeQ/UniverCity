@@ -25,10 +25,12 @@ void storeStudent(vector<shared_ptr<Student>> &students, const string &name, flo
 int readChoice()
 {
   int choice;
-  cout << "Enter 0 to quit" << endl;
-  cout << "Enter 1 to add a student" << endl;
-  cout << "Enter 2 to display all students" << endl;
-  cout << "Enter 3 to find the student with the highest score" << endl;
+  cout << "\nStudent Management System\n";
+  cout << "0. Exit\n";
+  cout << "1. Add Student\n";
+  cout << "2. Display Students\n";
+  cout << "3. Display best students\n";
+  cout << "Enter your choice: ";
   cin >> choice;
   return choice;
 }
