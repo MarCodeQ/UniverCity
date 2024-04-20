@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <cstdlib> // for rand()
-#include <ctime>   // for time()
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
@@ -148,12 +148,12 @@ public:
 
   void addUniStudent(const string &name, const string &dob, const string &school, const string &course, int semesters)
   {
-    uniStudents.push_back(new UniStudent(name, dob, school, course, semesters)); // Using pointers
+    uniStudents.push_back(new UniStudent(name, dob, school, course, semesters));
   }
 
   void addCollegeStudent(const string &name, const string &dob, const string &school, const string &course, int semesters)
   {
-    collegeStudents.push_back(new CollegeStudent(name, dob, school, course, semesters)); // Using pointers
+    collegeStudents.push_back(new CollegeStudent(name, dob, school, course, semesters));
   }
 
   void displayAllStudents() const
@@ -193,8 +193,8 @@ public:
 
 private:
   string name;
-  vector<UniStudent *> uniStudents;         // Using pointers
-  vector<CollegeStudent *> collegeStudents; // Using pointers
+  vector<UniStudent *> uniStudents;
+  vector<CollegeStudent *> collegeStudents;
 };
 
 int readChoice()

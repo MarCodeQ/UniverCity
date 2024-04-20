@@ -1,16 +1,14 @@
 #include <iostream>
 #include <vector>
-#include <memory> // for smart pointers
+#include <memory>
 using namespace std;
 struct Student
 {
   string name;
   float score;
 
-  // Constructor to initialize the Student object
   Student(const string &n, float s) : name(n), score(s) {}
 
-  // Function to display student information
   void display() const
   {
     cout << "Student: " << name << " with a score of: " << score << endl;

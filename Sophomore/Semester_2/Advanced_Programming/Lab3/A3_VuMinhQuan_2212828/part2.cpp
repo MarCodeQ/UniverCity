@@ -9,11 +9,9 @@ class StudentManager
 private:
   vector<string> students;
 
-  // Private constructor to prevent instantiation
   StudentManager() {}
 
 public:
-  // Public static method to access the singleton instance
   static StudentManager &getInstance()
   {
     static StudentManager instance;
