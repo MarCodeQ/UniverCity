@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <cstdlib> // for rand()
-#include <ctime>   // for time()
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
@@ -193,8 +193,8 @@ public:
 
 private:
   string name;
-  vector<UniStudent *> uniStudents;         // Using pointers
-  vector<CollegeStudent *> collegeStudents; // Using pointers
+  vector<UniStudent *> uniStudents;
+  vector<CollegeStudent *> collegeStudents;
 };
 
 int readChoice()
