@@ -4,7 +4,7 @@ outputs := $(inputs:.c=)
 all: $(outputs)
 
 $(outputs): %: %.c
-	g++ $(CFLAGS) -o $@ $<
+	gcc $(CFLAGS) -o $@ $<
 
 .PHONY: clean
 clean:
