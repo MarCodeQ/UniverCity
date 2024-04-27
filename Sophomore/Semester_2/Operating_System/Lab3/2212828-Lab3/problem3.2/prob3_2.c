@@ -24,8 +24,8 @@ void *producer(void *arg)
     sem_wait(&empty);
     put(i); // line P2
     printf("Producer %d put data %d\n", tid, i);
-    sem_post(&full);
     sleep(1);
+    sem_post(&full);
   }
   pthread_exit(NULL);
 }
@@ -34,15 +34,10 @@ void *consumer(void *arg)
 {
   int i, tmp = 0;
   int tid = *((int *)arg);
-  while (1)
+  while (tmp != -1 && tmp < 5)
   {
     sem_wait(&full);
     tmp = get(); // line C2
-    if (tmp == -1)
-    {
-      sem_post(&full); // Release the semaphore before exiting
-      break;
-    }
     printf("Consumer %d get data %d\n", tid, tmp);
     sleep(1);
     sem_post(&empty);
@@ -57,7 +52,7 @@ int main(int argc, char **argv)
   pthread_t producers[THREADS];
   pthread_t consumers[THREADS];
 
-  sem_init(&empty, 0, BUF_SIZE);
+  sem_init(&empty, 0, 1);
   sem_init(&full, 0, 0);
 
   for (i = 0; i < THREADS; i++)
@@ -93,7 +88,5 @@ int get()
   int tmp = buffer[use];      // line g1
   buffer[use] = -1;           // clean the item
   use = (use + 1) % BUF_SIZE; // line g2
-  if (tmp == LOOPS - 1)
-    return -1; // Indicate end of data for consumer
   return tmp;
 }
