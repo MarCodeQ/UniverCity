@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h> /* for getopt */
+#include <pthread.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 #include "utils.h"
 #include <errno.h>
@@ -13,29 +16,16 @@
  */
 extern int processopts(int argc, char **argv, struct _appconf *conf)
 {
-  int c;
-
-  while ((c = getopt(argc, argv, "a:t:s:")) != -1)
+  conf->arrsz = atoi(argv[1]);
+  conf->tnum = atoi(argv[2]);
+  if (argc == 4)
   {
-    switch (c)
-    {
-    case 'a':
-      if (tonum(optarg, &conf->arrsz) < 0)
-        return -1;
-      break;
-    case 't':
-      if (tonum(optarg, &conf->tnum) < 0)
-        return -1;
-      break;
-    case 's':
-      if (tonum(optarg, &conf->seednum) < 0)
-        return -1;
-      break;
-    default:
-      return -1;
-    }
+    conf->seednum = atoi(argv[3]);
   }
-
+  else
+  {
+    conf->seednum = 1;
+  }
   return 0;
 }
 /** process string to number.
@@ -47,26 +37,16 @@ extern int processopts(int argc, char **argv, struct _appconf *conf)
 extern int tonum(const char *nptr, int *num)
 {
   char *endptr;
-  long val;
-
-  errno = 0;
-  val = strtol(nptr, &endptr, 10);
-
-  if ((errno == ERANGE && (val == LONG_MAX || val == LONG_MIN)) || (errno != 0 && val == 0))
-  {
-    perror("strtol");
-    return -1;
-  }
+  long val = strtol(nptr, &endptr, 10);
 
   if (endptr == nptr)
   {
     fprintf(stderr, "No digits were found\n");
     return -1;
   }
-
-  if (*endptr != '\0')
+  if ((errno == ERANGE && (val == LONG_MAX || val == LONG_MIN)) || (errno != 0 && val == 0))
   {
-    fprintf(stderr, "Further characters after number: %s\n", endptr);
+    perror("strtol");
     return -1;
   }
 
@@ -79,27 +59,16 @@ extern int tonum(const char *nptr, int *num)
  */
 extern int validate_and_split_argarray(int arraysize, int num_thread, struct _range *thread_idx_range)
 {
-  int i, j, range, rem, start, end;
-
-  if (arraysize < num_thread * THRSL_MIN)
-    return -1;
-
-  range = arraysize / num_thread;
-  rem = arraysize % num_thread;
-
-  for (i = 0; i < num_thread; i++)
+  if (arraysize % num_thread != 0)
   {
-    start = i * range;
-    end = start + range - 1;
-    if (rem > 0)
-    {
-      end++;
-      rem--;
-    }
-    thread_idx_range[i].start = start;
-    thread_idx_range[i].end = end;
+    return -1;
   }
-
+  int range_size = arraysize / num_thread;
+  for (int i = 0; i < num_thread; ++i)
+  {
+    thread_idx_range[i].start = i * range_size;
+    thread_idx_range[i].end = (i + 1) * range_size;
+  }
   return 0;
 }
 
@@ -109,23 +78,22 @@ extern int validate_and_split_argarray(int arraysize, int num_thread, struct _ra
  */
 extern int generate_array_data(int *buf, int arraysize, int seednum)
 {
-  int i;
-
   srand(seednum);
-  for (i = 0; i < arraysize; i++)
-    buf[i] = rand() % 100;
-
+  for (int i = 0; i < arraysize; ++i)
+  {
+    buf[i] = rand();
+  }
   return 0;
 }
 
 /** display help */
 extern void help(int xcode)
 {
-  fprintf(stderr, "Usage: %s -a <arraysize> -t <num_thread> -s <seednum>\n", PACKAGE);
+  printf("Input: ./program <arrsz> <tnum> [<seednum>]\n");
   exit(xcode);
 }
 
-void *sum_worker(struct _range idx_range);
+void *sum_worker(void *idx_range);
 long validate_sum(int arraysize);
 
 /* Global sum buffer */
@@ -133,13 +101,17 @@ long sumbuf = 0;
 int *shrdarrbuf;
 pthread_mutex_t mtx;
 
-void *sum_worker(struct _range idx_range)
+void *sum_worker(void *arr)
 {
-  int i;
-
   // printf("In worker from %d to %d\n", idx_range.start, idx_range.end);
+  struct _range *idx_range = (struct _range *)arr;
 
-  return 0;
+  for (int i = idx_range->start; i < idx_range->end; ++i)
+  {
+    pthread_mutex_lock(&mtx);
+    sumbuf += shrdarrbuf[i];
+    pthread_mutex_unlock(&mtx);
+  }
 }
 
 int main(int argc, char *argv[])
@@ -209,14 +181,14 @@ int main(int argc, char *argv[])
   tid = malloc(appconf.tnum * sizeof(pthread_t));
 
   for (i = 0; i < appconf.tnum; i++)
-    pthread_create(&tid[i], NULL, sum_worker, (struct _range)(thread_idx_range[i]));
+    pthread_create(&tid[i], NULL, sum_worker, (void *)(&thread_idx_range[i]));
   for (i = 0; i < appconf.tnum; i++)
     pthread_join(tid[i], NULL);
   fflush(stdout);
 
   printf("%s gives sum result %ld\n", PACKAGE, sumbuf);
 
-  waitpid(pid);
+  waitpid(pid, NULL, 0);
   exit(0);
 }
 
