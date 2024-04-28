@@ -1,3 +1,4 @@
 make clean
 make all
-# ./2212828-Lab3
+clear
+./prob3_2
