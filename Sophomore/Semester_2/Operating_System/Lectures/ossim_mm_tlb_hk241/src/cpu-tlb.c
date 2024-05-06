@@ -2,23 +2,23 @@
  * Copyright (C) 2024 pdnguyen of the HCMC University of Technology
  */
 /*
- * Source Code License Grant: Authors hereby grants to Licensee 
- * a personal to use and modify the Licensed Source Code for 
+ * Source Code License Grant: Authors hereby grants to Licensee
+ * a personal to use and modify the Licensed Source Code for
  * the sole purpose of studying during attending the course CO2018.
  */
 //#ifdef CPU_TLB
 /*
- * CPU TLB
+ * CPU TLBubuntu terminal for vscodee
  * TLB module cpu/cpu-tlb.c
  */
- 
+
 #include "mm.h"
 #include <stdlib.h>
 #include <stdio.h>
 
 int tlb_change_all_page_tables_of(struct pcb_t *proc,  struct memphy_struct * mp)
 {
-  /* TODO update all page table directory info 
+  /* TODO update all page table directory info
    *      in flush or wipe TLB (if needed)
    */
 
@@ -34,7 +34,7 @@ int tlb_flush_tlb_of(struct pcb_t *proc, struct memphy_struct * mp)
 
 /*tlballoc - CPU TLB-based allocate a region memory
  *@proc:  Process executing the instruction
- *@size: allocated size 
+ *@size: allocated size
  *@reg_index: memory region ID (used to identify variable in symbole table)
  */
 int tlballoc(struct pcb_t *proc, uint32_t size, uint32_t reg_index)
@@ -52,7 +52,7 @@ int tlballoc(struct pcb_t *proc, uint32_t size, uint32_t reg_index)
 
 /*pgfree - CPU TLB-based free a region memory
  *@proc: Process executing the instruction
- *@size: allocated size 
+ *@size: allocated size
  *@reg_index: memory region ID (used to identify variable in symbole table)
  */
 int tlbfree_data(struct pcb_t *proc, uint32_t reg_index)
@@ -73,20 +73,20 @@ int tlbfree_data(struct pcb_t *proc, uint32_t reg_index)
  *@destination: destination storage
  */
 int tlbread(struct pcb_t * proc, uint32_t source,
-            uint32_t offset, 	uint32_t destination) 
+            uint32_t offset, 	uint32_t destination)
 {
   BYTE data, frmnum = -1;
-	
+
   /* TODO retrieve TLB CACHED frame num of accessing page(s)*/
   /* by using tlb_cache_read()/tlb_cache_write()*/
   /* frmnum is return value of tlb_cache_read/write value*/
-	
+
 #ifdef IODUMP
   if (frmnum >= 0)
-    printf("TLB hit at read region=%d offset=%d\n", 
+    printf("TLB hit at read region=%d offset=%d\n",
 	         source, offset);
-  else 
-    printf("TLB miss at read region=%d offset=%d\n", 
+  else
+    printf("TLB miss at read region=%d offset=%d\n",
 	         source, offset);
 #ifdef PAGETBL_DUMP
   print_pgtbl(proc, 0, -1); //print max TBL
