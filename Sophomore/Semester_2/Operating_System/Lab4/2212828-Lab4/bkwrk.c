@@ -1,16 +1,27 @@
 #include "bktpool.h"
 #include <signal.h>
 #include <stdio.h>
-
+#include <sys/ipc.h>
+#include <sys/shm.h>
 #define _GNU_SOURCE
 #include <linux/sched.h>
 #include <sys/syscall.h> /* Definition of SYS_* constants */
 #include <unistd.h>
+#include <pthread.h>
 
+pthread_mutex_t worker_mutex = PTHREAD_MUTEX_INITIALIZER;
 // #define DEBUG
 #define INFO
-#define WORK_THREAD
 
+#ifndef WORK_THREAD
+int *wrkid_tid;
+int *wrkid_busy;
+struct bkworker_t *worker;
+int *id;
+int *tid;
+#endif
+
+// struct bkworker_t* worker;
 void *bkwrk_worker(void *arg)
 {
   sigset_t set;
@@ -41,9 +52,14 @@ void *bkwrk_worker(void *arg)
 #endif
 
     /* Busy running */
-    if (wrk->func != NULL)
-      wrk->func(wrk->arg);
+    // if (wrk -> func != NULL) {
+    //   wrk -> func(wrk -> arg);
 
+    // }
+    if (worker[i].func != NULL)
+    {
+      worker[i].func(worker[i].arg);
+    }
     /* Advertise I DONE WORKING */
     wrkid_busy[i] = 0;
     worker[i].func = NULL;
@@ -68,12 +84,11 @@ int bktask_assign_worker(unsigned int bktaskid, unsigned int wrkid)
   worker[wrkid].func = tsk->func;
   worker[wrkid].arg = tsk->arg;
   worker[wrkid].bktaskid = bktaskid;
-
   printf("Assign tsk %d wrk %d \n", tsk->bktaskid, wrkid);
   return 0;
 }
 
-int bkwrk_create_worker()
+int bkwrk_create_worker(int shmid_tid, int shmid_busy, int shmid_worker, int shmid_id, int shmid_tid_tid)
 {
   unsigned int i;
 
@@ -101,12 +116,45 @@ int bkwrk_create_worker()
 #ifdef INFO
     fprintf(stderr, "bkwrk_create_worker got worker %u\n", wrkid_tid[i]);
 #endif
-
     usleep(100);
 
 #else
-
     /* TODO: Implement fork version of create worker */
+    unsigned int wrkid = i;
+    sigset_t set;
+    int s;
+
+    sigemptyset(&set);
+    sigaddset(&set, SIGQUIT);
+    sigaddset(&set, SIGUSR1);
+    sigprocmask(SIG_BLOCK, &set, NULL);
+    pid_t pid = fork();
+    if (pid == -1)
+    {
+      perror("fork erorrrrrrrrrrrrrrrrrrrrrrrr");
+      return 1;
+    }
+    else if (pid == 0)
+    {
+      wrkid_tid = (int *)shmat(shmid_tid, (void *)0, 0);
+      wrkid_busy = (int *)shmat(shmid_busy, (void *)0, 0);
+      worker = (struct bkworker_t *)shmat(shmid_worker, (void *)0, 0);
+      id = (int *)shmat(shmid_id, (void *)0, 0);
+      tid = (int *)shmat(shmid_tid_tid, (void *)0, 0);
+      bkwrk_worker((void *)&i);
+    }
+    else
+    {
+
+      wrkid_tid[i] = pid;
+      // Parent process
+      // Your code for the parent process goes here
+    }
+#ifdef INFO
+    fprintf(stderr, "bkwrk_create_worker got worker %u\n", wrkid_tid[i]);
+#endif
+    usleep(100);
+
 #endif
   }
 
@@ -119,8 +167,21 @@ int bkwrk_get_worker()
    * The return value is the ID of the worker which is not currently
    * busy or wrkid_busy[1] == 0
    */
+  pthread_mutex_lock(&worker_mutex);
 
-  return 0;
+  int freeWorker = -1;
+
+  for (int i = 0; i < MAX_WORKER; i++)
+  {
+    if (wrkid_busy[i] == 0)
+    {
+      freeWorker = i;
+      break;
+    }
+  }
+  pthread_mutex_unlock(&worker_mutex);
+
+  return freeWorker;
 }
 
 int bkwrk_dispatch_worker(unsigned int wrkid)
@@ -128,7 +189,6 @@ int bkwrk_dispatch_worker(unsigned int wrkid)
 
 #ifdef WORK_THREAD
   unsigned int tid = wrkid_tid[wrkid];
-
   /* Invalid task */
   if (worker[wrkid].func == NULL)
     return -1;
@@ -140,6 +200,12 @@ int bkwrk_dispatch_worker(unsigned int wrkid)
   syscall(SYS_tkill, tid, SIG_DISPATCH);
 #else
   /* TODO: Implement fork version to signal worker process here */
-
+  unsigned int pid = wrkid_tid[wrkid];
+  if (worker[wrkid].func == NULL)
+    return -1;
+#ifdef DEBUG
+  fprintf(stderr, "brkwrk dispatch wrkid %d - send signal %u \n", wrkid, tid);
+#endif
+  kill(pid, SIG_DISPATCH);
 #endif
 }
