@@ -20,4 +20,4 @@ getPriceFromItem (_, price) = price
 main :: IO ()
 main = putStrLn ("Price of shopping list is "
                 ++ show (sumShoppingList shoppingList)
-                ++ " cents.")
+t
