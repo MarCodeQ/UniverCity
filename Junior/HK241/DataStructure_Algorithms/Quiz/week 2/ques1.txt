@@ -1,0 +1,45 @@
+Link the data model to its phases in the database design and implementation process in the scope of our Database Systems course
+
+Requirements collection and analysis
+Logical database design
+Choice of a DBMS
+Database system implementation and tuning
+Physical database design
+Conceptual database design
+
+There are 3 options to choose:
+The entity relationship model
+Not applicable
+The relational data model
+
+
+Link the conceptual schema design approach to its activities
+
+1. Design a schema (or view) for each user group or application based only on its own requirements;
+merge/integrate these schemas into a global conceptual schema for the entire database;
+after that, reconstruct the individual views as external schemas
+
+2. Identify the abstraction of the database structure, meaning (semantics), interrelationships, and constraints
+design the conceptual schema of the database; after that, specify external schemas for the various user groups and applications
+
+3. Merge all the requirements of the different applications and user groups into a single set of requirements before schema design begins;
+design the conceptual schema of the database; after that, specify external schemas for the various user groups and applications
+
+There are 3 options to choose:
+The view integration approach and the centralized (or one-shot) schema design approach
+The view integration approach Identify the abstraction of the database structure,
+The centralized(or one - shot) schema design approach
+
+Link the data model to its appropriate steps in database design?
+
+1. Logical database design
+2. Physical design
+3. Requirements collection and analysis
+4. Conceptual database design
+
+There are 3 options to choose:
+
+
+1. Not applicable
+2. The representational data model
+3. The conceptual data model
