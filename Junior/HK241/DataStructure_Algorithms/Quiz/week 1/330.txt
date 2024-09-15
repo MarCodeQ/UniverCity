@@ -1,0 +1,8 @@
+T(n) = 1 + T(n/2)
+     = 1 + 1 + (T(n/4))
+     = 1 + 1 + 1 + (T(n/8))
+     = k + T(n/2^k)
+
+     when n/2^k = 1 then k = log2n
+
+     T(n)= log2n + T(1)
